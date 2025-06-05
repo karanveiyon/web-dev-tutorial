@@ -1,0 +1,463 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Notes - Beginner to Advanced</title>
+    <style>
+        *{ margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6;background: #f9f9f9; }
+        h1, h2 { color: #333; }
+        code { background: #eee; padding: 2px 4px; border-radius: 4px; }
+        pre { background: #eee; padding: 10px; border-radius: 4px; }
+        .example { margin-bottom: 20px; }
+        .output { background: #fff; padding: 10px; border-left: 4px solid #4CAF50; }
+        main{ padding: 20px;}
+        nav{width: 100%; display: flex; flex-direction: row; justify-content: space-between;align-items: center; background-color: rgb(31, 31, 31); padding:2px 10px}
+        .name-div { width: 50%; font-size: 24px; font-weight: bold; color: #ffffff; }
+        .menu-div {  width: 50%;align-items: center;}
+        .menu-div ul { list-style: none; display: flex; display: flex; flex-direction: row; justify-content: space-evenly; font-size: 14px; color: #ffffff; }
+        .menu-div a{ text-decoration: none; color: #ffffff; }
+        footer { text-align: center; padding: 10px; background-color: #333; color: #fff; position: relative; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <div class="name-div">Web Dev Lessons</div>
+        <div class="menu-div">
+            <ul>
+                <li><a href="./index.html">HTML</a></li>
+                <li><a href="./html_tag_attributes.html">HTML 1</a></li>
+                    <!-- <li><a href="./css.html">CSS</a></li> -->
+                    <li><a href="#">CSS</a></li>
+                    <!-- <li><a href="./js.html">Javascript</a></li> -->
+                    <li><a href="#">Javascript</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+    <h1>HTML Notes - Beginner to Advanced</h1>
+    <div>
+        <ul>
+            <li><a href="./Techscription web development 1.1 syllabus.pdf" download>syllabus</a></li>
+            <li><a href="./Web Development 1.0.pdf" download>Tools</a></li>
+        </ul>
+    </div>
+    
+    <div class="example">
+        <h2>1. Basic Structure of HTML</h2>
+        <pre><code>&lt;!DOCTYPE html&gt;
+        &lt;html&gt;
+          &lt;head&gt;
+            &lt;title&gt;My Page&lt;/title&gt;
+          &lt;/head&gt;
+          &lt;body&gt;
+            &lt;h1&gt;Hello World&lt;/h1&gt;
+          &lt;/body&gt;
+        &lt;/html&gt;</code></pre>
+        <div class="output">
+            <h1>Hello World</h1>
+        </div>
+    </div>
+    
+    <div class="example">
+        <h2>2. Headings</h2>
+        <pre><code>&lt;h1&gt;Heading 1&lt;/h1&gt;</code></pre>
+        <div class="output">
+            <h1>Heading 1</h1>
+        </div>
+    
+        <pre><code>&lt;h2&gt;Heading 2&lt;/h2&gt;</code></pre>
+        <div class="output">
+            <h2>Heading 2</h2>
+        </div>
+    
+        <pre><code>&lt;h3&gt;Heading 3&lt;/h3&gt;</code></pre>
+        <div class="output">
+            <h3>Heading 3</h3>
+        </div>
+    
+        <pre><code>&lt;h4&gt;Heading 4&lt;/h4&gt;</code></pre>
+        <div class="output">
+            <h4>Heading 4</h4>
+        </div>
+    
+        <pre><code>&lt;h5&gt;Heading 5&lt;/h5&gt;</code></pre>
+        <div class="output">
+            <h5>Heading 5</h5>
+        </div>
+    
+        <pre><code>&lt;h6&gt;Heading 6&lt;/h6&gt;</code></pre>
+        <div class="output">
+            <h6>Heading 6</h6>
+        </div>
+    </div>
+    
+    <h2>3. Text Formatting, Paragraphs, and Line Breaks</h2>
+    
+    <h3>3.1 Text Formatting</h3>
+    
+    <div class="example">
+        <pre><code>&lt;b&gt;Bold Text&lt;/b&gt;</code></pre>
+        <div class="output"><b>Bold Text</b></div>
+    </div>
+    
+    <div class="example">
+        <pre><code>&lt;strong&gt;Strong Text&lt;/strong&gt;</code></pre>
+        <div class="output"><strong>Strong Text</strong></div>
+    </div>
+    
+    <div class="example">
+        <pre><code>&lt;i&gt;Italic Text&lt;/i&gt;</code></pre>
+        <div class="output"><i>Italic Text</i></div>
+    </div>
+    
+    <div class="example">
+        <pre><code>&lt;em&gt;Emphasized Text&lt;/em&gt;</code></pre>
+        <div class="output"><em>Emphasized Text</em></div>
+    </div>
+    
+    <div class="example">
+        <pre><code>&lt;u&gt;Underlined Text&lt;/u&gt;</code></pre>
+        <div class="output"><u>Underlined Text</u></div>
+    </div>
+    
+    <div class="example">
+        <pre><code>&lt;mark&gt;Marked Text&lt;/mark&gt;</code></pre>
+        <div class="output"><mark>Marked Text</mark></div>
+    </div>
+    
+    <div class="example">
+        <pre><code>&lt;small&gt;Small Text&lt;/small&gt;</code></pre>
+        <div class="output"><small>Small Text</small></div>
+    </div>
+    
+    <div class="example">
+        <pre><code>&lt;del&gt;Deleted Text&lt;/del&gt;</code></pre>
+        <div class="output"><del>Deleted Text</del></div>
+    </div>
+    
+    <div class="example">
+        <pre><code>&lt;ins&gt;Inserted Text&lt;/ins&gt;</code></pre>
+        <div class="output"><ins>Inserted Text</ins></div>
+    </div>
+    
+    <div class="example">
+        <pre><code>&lt;sub&gt;Subscript&lt;/sub&gt;</code></pre>
+        <div class="output"><sub>Subscript</sub></div>
+    </div>
+    
+    <div class="example">
+        <pre><code>&lt;sup&gt;Superscript&lt;/sup&gt;</code></pre>
+        <div class="output"><sup>Superscript</sup></div>
+    </div>
+    
+    <h3>3.2 Paragraph Formatting</h3>
+    
+    <div class="example">
+        <pre><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></pre>
+        <div class="output">
+            <p>This is a paragraph.</p>
+        </div>
+    </div>
+    
+    <div class="example">
+        <pre><code>&lt;p&gt;This is another paragraph.&lt;/p&gt;</code></pre>
+        <div class="output">
+            <p>This is another paragraph.</p>
+        </div>
+    </div>
+    
+    <div class="example">
+        <pre><code>&lt;br&gt;This is after a line break.</code></pre>
+        <div class="output"><br>This is after a line break.</div>
+    </div>
+    
+    <div class="example">
+        <h2>4. Links and Images</h2>
+        <pre><code>&lt;a href="https://www.google.com"&gt;Visit Google&lt;/a&gt;</code></pre>
+        <div class="output"><a href="https://www.google.com">Visit Google</a></div>
+    
+        <pre><code>&lt;img src="https://picsum.photos/300/200" alt="Placeholder Image"&gt;</code></pre>
+        <div class="output">
+            <img src="https://picsum.photos/300/200" alt="Placeholder Image">
+        </div>
+    </div>
+    
+    <div class="example">
+        <h2>5. Lists (Ordered and Unordered)</h2>
+        <pre><code>&lt;ul&gt;
+          &lt;li&gt;Item 1&lt;/li&gt;
+          &lt;li&gt;Item 2&lt;/li&gt;
+        &lt;/ul&gt;</code></pre>
+        <div class="output">
+            <ul>
+                <li>Item 1</li>
+                <li>Item 2</li>
+            </ul>
+        </div>
+    
+        <pre><code>&lt;ol&gt;
+          &lt;li&gt;First&lt;/li&gt;
+          &lt;li&gt;Second&lt;/li&gt;
+        &lt;/ol&gt;</code></pre>
+        <div class="output">
+            <ol>
+                <li>First</li>
+                <li>Second</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="example">
+        <h2>6. Tables (with thead, tbody, and tfoot)</h2>
+        <pre><code>&lt;table border="1" cellpadding="10" cellspacing="0"&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th&gt;Name&lt;/th&gt;
+              &lt;th&gt;Roll No&lt;/th&gt;
+              &lt;th&gt;Tamil&lt;/th&gt;
+              &lt;th&gt;English&lt;/th&gt;
+              &lt;th&gt;Maths&lt;/th&gt;
+              &lt;th&gt;Science&lt;/th&gt;
+              &lt;th&gt;Social&lt;/th&gt;
+              &lt;th&gt;Total Marks&lt;/th&gt;
+              &lt;th&gt;Percentage&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;&lt;td&gt;Arjun&lt;/td&gt;&lt;td&gt;101&lt;/td&gt;&lt;td&gt;90&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;td&gt;95&lt;/td&gt;&lt;td&gt;88&lt;/td&gt;&lt;td&gt;92&lt;/td&gt;&lt;td&gt;450&lt;/td&gt;&lt;td&gt;90%&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Priya&lt;/td&gt;&lt;td&gt;102&lt;/td&gt;&lt;td&gt;80&lt;/td&gt;&lt;td&gt;78&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;td&gt;82&lt;/td&gt;&lt;td&gt;88&lt;/td&gt;&lt;td&gt;413&lt;/td&gt;&lt;td&gt;82.6%&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;Ravi&lt;/td&gt;&lt;td&gt;103&lt;/td&gt;&lt;td&gt;75&lt;/td&gt;&lt;td&gt;80&lt;/td&gt;&lt;td&gt;70&lt;/td&gt;&lt;td&gt;78&lt;/td&gt;&lt;td&gt;74&lt;/td&gt;&lt;td&gt;377&lt;/td&gt;&lt;td&gt;75.4%&lt;/td&gt;&lt;/tr&gt;
+          &lt;/tbody&gt;
+          &lt;tfoot&gt;
+            &lt;tr&gt;&lt;td colspan="9"&gt;End of Results&lt;/td&gt;&lt;/tr&gt;
+          &lt;/tfoot&gt;
+        &lt;/table&gt;</code></pre>
+        <div class="output">
+            <table border="1" cellpadding="10" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Roll No</th>
+                        <th>Tamil</th>
+                        <th>English</th>
+                        <th>Maths</th>
+                        <th>Science</th>
+                        <th>Social</th>
+                        <th>Total Marks</th>
+                        <th>Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Arjun</td>
+                        <td>101</td>
+                        <td>90</td>
+                        <td>85</td>
+                        <td>95</td>
+                        <td>88</td>
+                        <td>92</td>
+                        <td>450</td>
+                        <td>90%</td>
+                    </tr>
+                    <tr>
+                        <td>Priya</td>
+                        <td>102</td>
+                        <td>80</td>
+                        <td>78</td>
+                        <td>85</td>
+                        <td>82</td>
+                        <td>88</td>
+                        <td>413</td>
+                        <td>82.6%</td>
+                    </tr>
+                    <tr>
+                        <td>Ravi</td>
+                        <td>103</td>
+                        <td>75</td>
+                        <td>80</td>
+                        <td>70</td>
+                        <td>78</td>
+                        <td>74</td>
+                        <td>377</td>
+                        <td>75.4%</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="9">End of Results</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    
+
+<!-- 7. Forms (All Input Types) -->
+<div class="example">
+    <h2>7. Forms (All Input Types)</h2>
+    <pre><code>
+  &lt;form&gt;
+    Text: &lt;input type="text"&gt;&lt;br&gt;
+    Password: &lt;input type="password"&gt;&lt;br&gt;
+    Email: &lt;input type="email"&gt;&lt;br&gt;
+    Number: &lt;input type="number"&gt;&lt;br&gt;
+    Date: &lt;input type="date"&gt;&lt;br&gt;
+    Time: &lt;input type="time"&gt;&lt;br&gt;
+    Color: &lt;input type="color"&gt;&lt;br&gt;
+    Checkbox: &lt;input type="checkbox"&gt;&lt;br&gt;
+    Radio: &lt;input type="radio" name="gender"&gt; Male 
+           &lt;input type="radio" name="gender"&gt; Female&lt;br&gt;
+    File: &lt;input type="file"&gt;&lt;br&gt;
+    Range: &lt;input type="range"&gt;&lt;br&gt;
+    Dropdown: 
+    &lt;select&gt;
+      &lt;option value="html"&gt;HTML&lt;/option&gt;
+      &lt;option value="css"&gt;CSS&lt;/option&gt;
+      &lt;option value="js"&gt;JavaScript&lt;/option&gt;
+    &lt;/select&gt;&lt;br&gt;
+    URL: &lt;input type="url"&gt;&lt;br&gt;
+    Search: &lt;input type="search"&gt;&lt;br&gt;
+    Tel: &lt;input type="tel"&gt;&lt;br&gt;
+    Hidden: &lt;input type="hidden" value="hiddenValue"&gt;&lt;br&gt;
+    Submit: &lt;input type="submit" value="Submit"&gt;
+    Reset: &lt;input type="reset" value="Reset"&gt;
+  &lt;/form&gt;
+    </code></pre>
+    <div class="output">
+        <form>
+            Text: <input type="text"><br>
+            Password: <input type="password"><br>
+            Email: <input type="email"><br>
+            Number: <input type="number"><br>
+            Date: <input type="date"><br>
+            Time: <input type="time"><br>
+            Color: <input type="color"><br>
+            Checkbox: <input type="checkbox"><br>
+            Radio: <input type="radio" name="gender"> Male
+            <input type="radio" name="gender"> Female<br>
+            File: <input type="file"><br>
+            Range: <input type="range"><br>
+            Dropdown:
+            <select>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="js">JavaScript</option>
+            </select><br>
+            URL: <input type="url"><br>
+            Search: <input type="search"><br>
+            Tel: <input type="tel"><br>
+            Hidden: <input type="hidden" value="hiddenValue"><br>
+            Submit: <input type="submit" value="Submit">
+            Reset: <input type="reset" value="Reset">
+        </form>
+    </div>
+</div>
+  
+
+<!-- 8.1 Semantic Tags -->
+<div class="example">
+    <h2>8.1 Semantic Tags</h2>
+    <pre><code>
+  &lt;header&gt;Site Header&lt;/header&gt;
+  &lt;nav&gt;Navigation Bar&lt;/nav&gt;
+  &lt;main&gt;Main Content Area&lt;/main&gt;
+  &lt;section&gt;Section Content&lt;/section&gt;
+  &lt;article&gt;Article Content&lt;/article&gt;
+  &lt;aside&gt;Sidebar Content&lt;/aside&gt;
+  &lt;footer&gt;Site Footer&lt;/footer&gt;
+  &lt;figure&gt;&lt;img src="https://picsum.photos/100/60" alt="Sample"&gt;&lt;figcaption&gt;Caption&lt;/figcaption&gt;&lt;/figure&gt;
+  &lt;mark&gt;Highlighted&lt;/mark&gt;
+  &lt;time&gt;2025-06-04&lt;/time&gt;
+  &lt;details&gt;&lt;summary&gt;More Info&lt;/summary&gt;Hidden details&lt;/details&gt;
+  &lt;dialog open&gt;Dialog box&lt;/dialog&gt;
+  &lt;address&gt;Contact info&lt;/address&gt;
+  &lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;
+  &lt;strong&gt;Strong text&lt;/strong&gt;
+  &lt;em&gt;Emphasized text&lt;/em&gt;
+    </code></pre>
+    <div class="output">
+        <header>Site Header</header>
+        <nav>Navigation Bar</nav>
+        <main>Main Content Area</main>
+        <section>Section Content</section>
+        <article>Article Content</article>
+        <aside>Sidebar Content</aside>
+        <footer>Site Footer</footer>
+        <figure>
+            <img src="https://picsum.photos/100/60" alt="Sample">
+            <figcaption>Caption</figcaption>
+        </figure>
+        <mark>Highlighted</mark><br>
+        <time>2025-06-04</time><br>
+        <details>
+            <summary>More Info</summary>
+            Hidden details
+        </details>
+        <dialog open>Dialog box</dialog><br>
+        <address>Contact info</address><br>
+        <abbr title="HyperText Markup Language">HTML</abbr><br>
+        <strong>Strong text</strong><br>
+        <em>Emphasized text</em>
+    </div>
+</div>
+
+<!-- 8.2 Non-Semantic Tags -->
+<div class="example">
+    <h2>8.2 Non-Semantic Tags</h2>
+    <pre><code>
+  &lt;div&gt;A generic container&lt;/div&gt;
+  &lt;span&gt;A generic inline container&lt;/span&gt;
+  &lt;b&gt;Bold text&lt;/b&gt;
+  &lt;i&gt;Italic text&lt;/i&gt;
+  &lt;font&gt;Obsolete font tag&lt;/font&gt;
+  &lt;center&gt;Centered text (obsolete)&lt;/center&gt;
+  &lt;s&gt;Strikethrough text&lt;/s&gt;
+  &lt;u&gt;Underlined text&lt;/u&gt;
+    </code></pre>
+    <div class="output">
+        <div>A generic container</div>
+        <span>A generic inline container</span><br>
+        <b>Bold text</b><br>
+        <i>Italic text</i><br>
+        <font>Obsolete font tag</font><br>
+        <center>Centered text (obsolete)</center>
+        <s>Strikethrough text</s><br>
+        <u>Underlined text</u>
+    </div>
+</div>
+
+<!-- 8.3 Fieldset and Legend -->
+<div class="example">
+    <h2>8.3 &lt;legend&gt; Tag with &lt;fieldset&gt;</h2>
+    <pre><code>
+  &lt;fieldset&gt;
+    &lt;legend&gt;Personal Information&lt;/legend&gt;
+    Name: &lt;input type="text"&gt;&lt;br&gt;
+    Age: &lt;input type="number"&gt;
+  &lt;/fieldset&gt;
+    </code></pre>
+    <div class="output">
+        <fieldset>
+            <legend>Personal Information</legend>
+            Name: <input type="text"><br>
+            Age: <input type="number">
+        </fieldset>
+    </div>
+</div>
+
+<div>
+    <a href="./html_tag_attributes.html">For HTML Tags with Arttibutes</a>
+</div>
+</main>
+<footer>
+    <p>contact: karanveiyon@gmail.com</p>
+    <!-- <p>contact: karan@techscription.com</p> -->
+    <p>&copy; 2025 Techscription</p>
+</footer>
+</body>
+</html>

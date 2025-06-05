@@ -1,0 +1,1289 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Tag Attributes Reference with Outputs</title>
+    <style>
+        *{ margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; background: #f9f9f9; }
+        h1, h2, h3 { color: #333; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        pre { background: #eee; padding: 10px; border-radius: 4px; }
+        code { font-family: monospace; }
+        .example { margin-bottom: 20px; }
+        .output { background: #fff; padding: 10px; border-left: 4px solid #4CAF50; margin-top: 10px; }
+        main{ padding: 20px;}
+        nav{width: 100%; display: flex; flex-direction: row; justify-content: space-between;align-items: center; background-color: rgb(31, 31, 31); padding:2px 10px}
+        .name-div { width: 50%; font-size: 24px; font-weight: bold; color: #ffffff; }
+        .menu-div {  width: 50%;align-items: center;}
+        .menu-div ul { list-style: none; display: flex; display: flex; flex-direction: row; justify-content: space-evenly; font-size: 14px; color: #ffffff; }
+        .menu-div a{ text-decoration: none; color: #ffffff; }
+        footer { text-align: center; padding: 10px; background-color: #333; color: #fff; position: relative; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="name-div">Web Dev Lessons</div>
+            <div class="menu-div">
+                <ul>
+                    <li><a href="./index.html">HTML</a></li>
+                    <li><a href="./html_tag_attributes.html">HTML 1</a></li>
+                    <!-- <li><a href="./css.html">CSS</a></li> -->
+                    <li><a href="#">CSS</a></li>
+                    <!-- <li><a href="./js.html">Javascript</a></li> -->
+                    <li><a href="#">Javascript</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+    <h1>HTML Tag Attributes Reference with Outputs</h1>
+    <p>This document provides a reference for HTML tags, including their attributes, a one-line description for each attribute, and the rendered output for each tag.</p>
+
+    <div class="example">
+        <h2>1. Document Structure Tags</h2>
+        <h3>1.1 &lt;!DOCTYPE html&gt;</h3>
+        <p>Declares the document type as HTML5.</p>
+        <pre><code>&lt;!DOCTYPE html&gt;</code></pre>
+        <div class="output">
+            <p>[No visible output; defines the document as HTML5]</p>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>(No attributes)</td><td>HTML5 doctype has no attributes.</td></tr>
+        </table>
+
+        <h3>1.2 &lt;html&gt;</h3>
+        <pre><code>&lt;html lang="en"&gt;
+    &lt;body&gt;Content&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        <div class="output">
+            Content
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>lang</td><td>Specifies the language of the document (e.g., "en" for English).</td></tr>
+            <tr><td>dir</td><td>Defines text direction (e.g., "ltr" or "rtl").</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+        </table>
+
+        <h3>1.3 &lt;head&gt;</h3>
+        <pre><code>&lt;head&gt;
+    &lt;title&gt;Sample&lt;/title&gt;
+&lt;/head&gt;</code></pre>
+        <div class="output">
+            <p>[No visible output; contains metadata]</p>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>profile</td><td>Specifies a URI for metadata profile (rarely used).</td></tr>
+        </table>
+
+        <h3>1.4 &lt;title&gt;</h3>
+        <pre><code>&lt;head&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
+&lt;/head&gt;</code></pre>
+        <div class="output">
+            <p>[Displayed in browser title bar: "My Page"]</p>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>(No specific attributes)</td><td>Contains text for the document title.</td></tr>
+        </table>
+
+        <h3>1.5 &lt;meta&gt;</h3>
+        <pre><code>&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+&lt;/head&gt;</code></pre>
+        <div class="output">
+            <p>[No visible output; sets character encoding]</p>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>charset</td><td>Defines the character encoding (e.g., "UTF-8").</td></tr>
+            <tr><td>name</td><td>Specifies metadata name (e.g., "viewport", "description").</td></tr>
+            <tr><td>content</td><td>Provides the value for the metadata name.</td></tr>
+            <tr><td>http-equiv</td><td>Defines HTTP header equivalent (e.g., "refresh").</td></tr>
+        </table>
+    </div>
+
+    <div class="example">
+        <h2>2. Headings Tags</h2>
+        <h3>2.1 &lt;h1&gt; to &lt;h6&gt;</h3>
+        <pre><code>&lt;h1&gt;Heading 1&lt;/h1&gt;</code></pre>
+        <div class="output">
+            <h1>Heading 1</h1>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+            <tr><td>align</td><td>Aligns the heading (deprecated, use CSS).</td></tr>
+        </table>
+    </div>
+
+    <div class="example">
+        <h2>3. Text Formatting Tags</h2>
+        <h3>3.1 &lt;b&gt;</h3>
+        <pre><code>&lt;b&gt;Bold Text&lt;/b&gt;</code></pre>
+        <div class="output">
+            <b>Bold Text</b>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>3.2 &lt;strong&gt;</h3>
+        <pre><code>&lt;strong&gt;Strong Text&lt;/strong&gt;</code></pre>
+        <div class="output">
+            <strong>Strong Text</strong>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>3.3 &lt;i&gt;</h3>
+        <pre><code>&lt;i&gt;Italic Text&lt;/i&gt;</code></pre>
+        <div class="output">
+            <i>Italic Text</i>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>3.4 &lt;em&gt;</h3>
+        <pre><code>&lt;em&gt;Emphasized Text&lt;/em&gt;</code></pre>
+        <div class="output">
+            <em>Emphasized Text</em>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>3.5 &lt;u&gt;</h3>
+        <pre><code>&lt;u&gt;Underlined Text&lt;/u&gt;</code></pre>
+        <div class="output">
+            <u>Underlined Text</u>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>3.6 &lt;mark&gt;</h3>
+        <pre><code>&lt;mark&gt;Marked Text&lt;/mark&gt;</code></pre>
+        <div class="output">
+            <mark>Marked Text</mark>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>3.7 &lt;small&gt;</h3>
+        <pre><code>&lt;small&gt;Small Text&lt;/small&gt;</code></pre>
+        <div class="output">
+            <small>Small Text</small>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>3.8 &lt;del&gt;</h3>
+        <pre><code>&lt;del&gt;Deleted Text&lt;/del&gt;</code></pre>
+        <div class="output">
+            <del>Deleted Text</del>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>cite</td><td>URL explaining why the text was deleted.</td></tr>
+            <tr><td>datetime</td><td>Specifies the date and time of deletion.</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>3.9 &lt;ins&gt;</h3>
+        <pre><code>&lt;ins&gt;Inserted Text&lt;/ins&gt;</code></pre>
+        <div class="output">
+            <ins>Inserted Text</ins>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>cite</td><td>URL explaining why the text was inserted.</td></tr>
+            <tr><td>datetime</td><td>Specifies the date and time of insertion.</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>3.10 &lt;sub&gt;</h3>
+        <pre><code>&lt;sub&gt;Subscript&lt;/sub&gt;</code></pre>
+        <div class="output">
+            <sub>Subscript</sub>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>3.11 &lt;sup&gt;</h3>
+        <pre><code>&lt;sup&gt;Superscript&lt;/sup&gt;</code></pre>
+        <div class="output">
+            <sup>Superscript</sup>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+    </div>
+
+    <div class="example">
+        <h2>4. Paragraph and Line Break Tags</h2>
+        <h3>4.1 &lt;p&gt;</h3>
+        <pre><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></pre>
+        <div class="output">
+            <p>This is a paragraph.</p>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+            <tr><td>align</td><td>Aligns the paragraph (deprecated, use CSS).</td></tr>
+        </table>
+
+        <h3>4.2 &lt;br&gt;</h3>
+        <pre><code>Line 1&lt;br&gt;Line 2</code></pre>
+        <div class="output">
+            Line 1<br>Line 2
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+    </div>
+
+    <div class="example">
+        <h2>5. Links and Images Tags</h2>
+        <h3>5.1 &lt;a&gt;</h3>
+        <pre><code>&lt;a href="https://www.google.com"&gt;Visit Google&lt;/a&gt;</code></pre>
+        <div class="output">
+            <a href="https://www.google.com">Visit Google</a>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>href</td><td>Specifies the URL of the linked resource.</td></tr>
+            <tr><td>target</td><td>Defines where to open the link (e.g., "_blank").</td></tr>
+            <tr><td>rel</td><td>Specifies the relationship between the document and the linked resource.</td></tr>
+            <tr><td>download</td><td>Indicates the linked resource is to be downloaded.</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>5.2 &lt;img&gt;</h3>
+        <pre><code>&lt;img src="https://picsum.photos/100/60" alt="Placeholder Image"&gt;</code></pre>
+        <div class="output">
+            <img src="https://picsum.photos/100/60" alt="Placeholder Image">
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>src</td><td>Specifies the URL of the image.</td></tr>
+            <tr><td>alt</td><td>Provides alternative text for accessibility.</td></tr>
+            <tr><td>width</td><td>Sets the width of the image.</td></tr>
+            <tr><td>height</td><td>Sets the height of the image.</td></tr>
+            <tr><td>loading</td><td>Controls image loading behavior (e.g., "lazy").</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+    </div>
+
+    <div class="example">
+        <h2>6. List Tags</h2>
+        <h3>6.1 &lt;ul&gt;</h3>
+        <pre><code>&lt;ul&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        <div class="output">
+            <ul>
+                <li>Item 1</li>
+            </ul>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>6.2 &lt;ol&gt;</h3>
+        <pre><code>&lt;ol&gt;
+    &lt;li&gt;First&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+        <div class="output">
+            <ol>
+                <li>First</li>
+            </ol>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>start</td><td>Specifies the starting number for the list.</td></tr>
+            <tr><td>type</td><td>Defines the numbering type (e.g., "1", "A", "a").</td></tr>
+            <tr><td>reversed</td><td>Reverses the order of the list.</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>6.3 &lt;li&gt;</h3>
+        <pre><code>&lt;ul&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        <div class="output">
+            <ul>
+                <li>Item 1</li>
+            </ul>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>value</td><td>Specifies the value of the list item (for ordered lists).</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+    </div>
+
+    <div class="example">
+        <h2>7. Table Tags</h2>
+        <h3>7.1 &lt;table&gt;</h3>
+        <pre><code>&lt;table border="1"&gt;
+    &lt;tr&gt;&lt;td&gt;Cell&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+        <div class="output">
+            <table border="1">
+                <tr><td>Cell</td></tr>
+            </table>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>border</td><td>Sets the border thickness (deprecated, use CSS).</td></tr>
+            <tr><td>cellpadding</td><td>Sets padding inside cells (deprecated, use CSS).</td></tr>
+            <tr><td>cellspacing</td><td>Sets spacing between cells (deprecated, use CSS).</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>7.2 &lt;thead&gt;</h3>
+        <pre><code>&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;&lt;th&gt;Header&lt;/th&gt;&lt;/tr&gt;
+    &lt;/thead&gt;
+&lt;/table&gt;</code></pre>
+        <div class="output">
+            <table>
+                <thead>
+                    <tr><th>Header</th></tr>
+                </thead>
+            </table>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>7.3 &lt;tbody&gt;</h3>
+        <pre><code>&lt;table&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;&lt;td&gt;Body&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+        <div class="output">
+            <table>
+                <tbody>
+                    <tr><td>Body</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>7.4 &lt;tfoot&gt;</h3>
+        <pre><code>&lt;table&gt;
+    &lt;tfoot&gt;
+        &lt;tr&gt;&lt;td&gt;Footer&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+        <div class="output">
+            <table>
+                <tfoot>
+                    <tr><td>Footer</td></tr>
+                </tfoot>
+            </table>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>7.5 &lt;tr&gt;</h3>
+        <pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Row&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+        <div class="output">
+            <table>
+                <tr>
+                    <td>Row</td>
+                </tr>
+            </table>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>7.6 &lt;th&gt;</h3>
+        <pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Name&lt;/th&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+        <div class="output">
+            <table>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </table>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>colspan</td><td>Specifies the number of columns the cell spans.</td></tr>
+            <tr><td>rowspan</td><td>Specifies the number of rows the cell spans.</td></tr>
+            <tr><td>scope</td><td>Defines the cell’s scope (e.g., "col", "row").</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>7.7 &lt;td&gt;</h3>
+        <pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Arjun&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+        <div class="output">
+            <table>
+                <tr>
+                    <td>Arjun</td>
+                </tr>
+            </table>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>colspan</td><td>Specifies the number of columns the cell spans.</td></tr>
+            <tr><td>rowspan</td><td>Specifies the number of rows the cell spans.</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+    </div>
+
+    <div class="example">
+        <h2>8. Form Tags</h2>
+        <h3>8.1 &lt;form&gt;</h3>
+        <pre><code>&lt;form&gt;
+    &lt;input type="text"&gt;
+&lt;/form&gt;</code></pre>
+        <div class="output">
+            <form>
+                <input type="text">
+            </form>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>action</td><td>Specifies the URL where form data is sent.</td></tr>
+            <tr><td>method</td><td>Defines the HTTP method (e.g., "get", "post").</td></tr>
+            <tr><td>enctype</td><td>Sets the encoding type for form data (e.g., "multipart/form-data").</td></tr>
+            <tr><td>target</td><td>Defines where to display the response (e.g., "_blank").</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>8.2 &lt;input&gt;</h3>
+        <pre><code>&lt;input type="text"&gt;</code></pre>
+        <div class="output">
+            <input type="text">
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>type</td><td>Sets the input type (e.g., "text", "password", "email").</td></tr>
+            <tr><td>name</td><td>Specifies the name of the input for form submission.</td></tr>
+            <tr><td>value</td><td>Defines the initial value of the input.</td></tr>
+            <tr><td>placeholder</td><td>Provides a hint for the expected input.</td></tr>
+            <tr><td>required</td><td>Indicates the input is mandatory.</td></tr>
+            <tr><td>disabled</td><td>Disables the input field.</td></tr>
+            <tr><td>readonly</td><td>Makes the input field read-only.</td></tr>
+            <tr><td>maxlength</td><td>Sets the maximum number of characters allowed.</td></tr>
+            <tr><td>min</td><td>Sets the minimum value for number/date inputs.</td></tr>
+            <tr><td>max</td><td>Sets the maximum value for number/date inputs.</td></tr>
+            <tr><td>step</td><td>Defines the increment for number/range inputs.</td></tr>
+            <tr><td>pattern</td><td>Specifies a regular expression for input validation.</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>8.3 &lt;fieldset&gt;</h3>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Info&lt;/legend&gt;
+    &lt;input type="text"&gt;
+&lt;/fieldset&gt;</code></pre>
+        <div class="output">
+            <fieldset>
+                <legend>Info</legend>
+                <input type="text">
+            </fieldset>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>disabled</td><td>Disables all form controls within the fieldset.</td></tr>
+            <tr><td>form</td><td>Associates the fieldset with a form by ID.</td></tr>
+            <tr><td>name</td><td>Specifies the name of the fieldset.</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>8.4 &lt;legend&gt;</h3>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Personal Information&lt;/legend&gt;
+&lt;/fieldset&gt;</code></pre>
+        <div class="output">
+            <fieldset>
+                <legend>Personal Information</legend>
+            </fieldset>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+    </div>
+    <div class="example">
+        <h2>8. Form Tags (Dropdown)</h2>
+    
+        <h3>8.5 &lt;select&gt;</h3>
+        <p>Creates a dropdown menu for selecting one or more options.</p>
+        <pre><code>&lt;form&gt;
+            &lt;select name="dropdown"&gt;
+                &lt;option value="option1"&gt;Option 1&lt;/option&gt;
+                &lt;option value="option2"&gt;Option 2&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/form&gt;</code></pre>
+        <div class="output">
+            <form>
+                <select name="dropdown">
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                </select>
+            </form>
+        </div>
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>Specifies the name of the dropdown for form submission.</td>
+            </tr>
+            <tr>
+                <td>multiple</td>
+                <td>Allows multiple options to be selected.</td>
+            </tr>
+            <tr>
+                <td>size</td>
+                <td>Sets the number of visible options in the dropdown.</td>
+            </tr>
+            <tr>
+                <td>required</td>
+                <td>Indicates that a selection is mandatory.</td>
+            </tr>
+            <tr>
+                <td>disabled</td>
+                <td>Disables the dropdown menu.</td>
+            </tr>
+            <tr>
+                <td>class</td>
+                <td>Assigns one or more class names for CSS styling.</td>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>Assigns a unique identifier for the element.</td>
+            </tr>
+            <tr>
+                <td>style</td>
+                <td>Applies inline CSS styles.</td>
+            </tr>
+        </table>
+    
+        <h3>8.6 &lt;option&gt;</h3>
+        <p>Defines an option within a &lt;select&gt; dropdown menu.</p>
+        <pre><code>&lt;form&gt;
+            &lt;select name="dropdown"&gt;
+                &lt;option value="option1"&gt;Option 1&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/form&gt;</code></pre>
+        <div class="output">
+            <form>
+                <select name="dropdown">
+                    <option value="option1">Option 1</option>
+                </select>
+            </form>
+        </div>
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>value</td>
+                <td>Specifies the data sent when the option is selected.</td>
+            </tr>
+            <tr>
+                <td>selected</td>
+                <td>Pre-selects the option by default.</td>
+            </tr>
+            <tr>
+                <td>disabled</td>
+                <td>Disables the specific option.</td>
+            </tr>
+            <tr>
+                <td>label</td>
+                <td>Provides a shorter label for the option (rarely used).</td>
+            </tr>
+            <tr>
+                <td>class</td>
+                <td>Assigns one or more class names for CSS styling.</td>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>Assigns a unique identifier for the element.</td>
+            </tr>
+            <tr>
+                <td>style</td>
+                <td>Applies inline CSS styles.</td>
+            </tr>
+        </table>
+        </div>
+
+    <div class="example">
+        <h2>9. Semantic Tags</h2>
+        <h3>9.1 &lt;header&gt;</h3>
+        <pre><code>&lt;header&gt;Site Header&lt;/header&gt;</code></pre>
+        <div class="output">
+            <header>Site Header</header>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>9.2 &lt;nav&gt;</h3>
+        <pre><code>&lt;nav&gt;Navigation Bar&lt;/nav&gt;</code></pre>
+        <div class="output">
+            <nav>Navigation Bar</nav>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>9.3 &lt;main&gt;</h3>
+        <pre><code>&lt;main&gt;Main Content Area&lt;/main&gt;</code></pre>
+        <div class="output">
+            <main>Main Content Area</main>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>9.4 &lt;section&gt;</h3>
+        <pre><code>&lt;section&gt;Section Content&lt;/section&gt;</code></pre>
+        <div class="output">
+            <section>Section Content</section>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>9.5 &lt;article&gt;</h3>
+        <pre><code>&lt;article&gt;Article Content&lt;/article&gt;</code></pre>
+        <div class="output">
+            <article>Article Content</article>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>9.6 &lt;aside&gt;</h3>
+        <pre><code>&lt;aside&gt;Sidebar Content&lt;/aside&gt;</code></pre>
+        <div class="output">
+            <aside>Sidebar Content</aside>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>9.7 &lt;footer&gt;</h3>
+        <pre><code>&lt;footer&gt;Site Footer&lt;/footer&gt;</code></pre>
+        <div class="output">
+            <footer>Site Footer</footer>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>9.8 &lt;figure&gt;</h3>
+        <pre><code>&lt;figure&gt;
+    &lt;img src="https://picsum.photos/100/60" alt="Sample"&gt;
+    &lt;figcaption&gt;Caption&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+        <div class="output">
+            <figure>
+                <img src="https://picsum.photos/100/60" alt="Sample">
+                <figcaption>Caption</figcaption>
+            </figure>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>9.9 &lt;figcaption&gt;</h3>
+        <pre><code>&lt;figure&gt;
+    &lt;figcaption&gt;Caption&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+        <div class="output">
+            <figure>
+                <figcaption>Caption</figcaption>
+            </figure>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>9.10 &lt;time&gt;</h3>
+        <pre><code>&lt;time&gt;2025-06-04&lt;/time&gt;</code></pre>
+        <div class="output">
+            <time>2025-06-04</time>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>datetime</td><td>Specifies a machine-readable date/time.</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>9.11 &lt;details&gt;</h3>
+        <pre><code>&lt;details&gt;
+    &lt;summary&gt;More Info&lt;/summary&gt;
+    Hidden details
+&lt;/details&gt;</code></pre>
+        <div class="output">
+            <details>
+                <summary>More Info</summary>
+                Hidden details
+            </details>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>open</td><td>Displays the details content by default.</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>9.12 &lt;summary&gt;</h3>
+        <pre><code>&lt;details&gt;
+    &lt;summary&gt;Clickable summary&lt;/summary&gt;
+&lt;/details&gt;</code></pre>
+        <div class="output">
+            <details>
+                <summary>Clickable summary</summary>
+            </details>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>9.13 &lt;dialog&gt;</h3>
+        <pre><code>&lt;dialog open&gt;Dialog box&lt;/dialog&gt;</code></pre>
+        <div class="output">
+            <dialog open>Dialog box</dialog>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>open</td><td>Displays the dialog box by default.</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>9.14 &lt;address&gt;</h3>
+        <pre><code>&lt;address&gt;Contact info&lt;/address&gt;</code></pre>
+        <div class="output">
+            <address>Contact info</address>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>9.15 &lt;abbr&gt;</h3>
+        <pre><code>&lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;</code></pre>
+        <div class="output">
+            <abbr title="HyperText Markup Language">HTML</abbr>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>title</td><td>Provides the full form or description of the abbreviation.</td></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+    </div>
+
+    <div class="example">
+        <h2>10. Non-Semantic Tags</h2>
+        <h3>10.1 &lt;div&gt;</h3>
+        <pre><code>&lt;div&gt;A generic container&lt;/div&gt;</code></pre>
+        <div class="output">
+            <div>A generic container</div>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>10.2 &lt;span&gt;</h3>
+        <pre><code>&lt;span&gt;A generic inline container&lt;/span&gt;</code></pre>
+        <div class="output">
+            <span>A generic inline container</span>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+
+        <h3>10.3 &lt;s&gt;</h3>
+        <pre><code>&lt;s&gt;Strikethrough text&lt;/s&gt;</code></pre>
+        <div class="output">
+            <s>Strikethrough text</s>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>class</td><td>Assigns one or more class names for CSS styling.</td></tr>
+            <tr><td>id</td><td>Assigns a unique identifier for the element.</td></tr>
+            <tr><td>style</td><td>Applies inline CSS styles.</td></tr>
+        </table>
+    </div>
+
+    <div class="example">
+        <h2>11. Deprecated Tags</h2>
+        <p>Note: These tags are deprecated and should be avoided in modern HTML. Alternatives (e.g., CSS or other tags) are recommended.</p>
+        <h3>11.1 &lt;acronym&gt;</h3>
+        <pre><code>&lt;acronym title="National Aeronautics and Space Administration"&gt;NASA&lt;/acronym&gt;</code></pre>
+        <div class="output">
+            <abbr title="National Aeronautics and Space Administration">NASA</abbr>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>title</td><td>Provided the full form of the acronym (use &lt;abbr&gt; instead).</td></tr>
+        </table>
+
+        <h3>11.2 &lt;applet&gt;</h3>
+        <pre><code>&lt;applet code="Example.class"&gt;&lt;/applet&gt;</code></pre>
+        <div class="output">
+            <i>[Applet: Deprecated]</i>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>code</td><td>Specified the Java applet class file (use &lt;object&gt; instead).</td></tr>
+            <tr><td>width</td><td>Defined the applet width.</td></tr>
+            <tr><td>height</td><td>Defined the applet height.</td></tr>
+        </table>
+
+        <h3>11.3 &lt;basefont&gt;</h3>
+        <pre><code>&lt;basefont size="4" color="blue" face="Arial"&gt;</code></pre>
+        <div class="output">
+            <span style="color:blue; font-family:Arial; font-size:1.1em;">[Basefont simulated]</span>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>size</td><td>Defined the default font size (use CSS instead).</td></tr>
+            <tr><td>color</td><td>Defined the default font color (use CSS instead).</td></tr>
+            <tr><td>face</td><td>Defined the default font face (use CSS instead).</td></tr>
+        </table>
+
+        <h3>11.4 &lt;bgsound&gt;</h3>
+        <pre><code>&lt;bgsound src="sound.wav"&gt;</code></pre>
+        <div class="output">
+            <i>[Background Sound: Deprecated]</i>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>src</td><td>Specified the audio file URL (use &lt;audio&gt; instead).</td></tr>
+            <tr><td>loop</td><td>Controlled audio looping behavior.</td></tr>
+        </table>
+
+        <h3>11.5 &lt;blink&gt;</h3>
+        <pre><code>&lt;blink&gt;Blinking text&lt;/blink&gt;</code></pre>
+        <div class="output">
+            <span style="animation: blinker 1s linear infinite;">Blinking text</span>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>(No specific attributes)</td><td>Caused text to blink (use CSS animations instead).</td></tr>
+        </table>
+
+        <h3>11.6 &lt;center&gt;</h3>
+        <pre><code>&lt;center&gt;Centered text&lt;/center&gt;</code></pre>
+        <div class="output">
+            <div style="text-align:center;">Centered text</div>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>(No specific attributes)</td><td>Centered content (use CSS text-align instead).</td></tr>
+        </table>
+
+        <h3>11.7 &lt;dir&gt;</h3>
+        <pre><code>&lt;dir&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+&lt;/dir&gt;</code></pre>
+        <div class="output">
+            <ul>
+                <li>Item 1</li>
+            </ul>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>(No specific attributes)</td><td>Displayed a directory list (use &lt;ul&gt; instead).</td></tr>
+        </table>
+
+        <h3>11.8 &lt;font&gt;</h3>
+        <pre><code>&lt;font face="Courier" size="4" color="red"&gt;Styled text&lt;/font&gt;</code></pre>
+        <div class="output">
+            <span style="font-family:Courier; font-size:1.2em; color:red;">Styled text</span>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>face</td><td>Specified the font face (use CSS instead).</td></tr>
+            <tr><td>size</td><td>Specified the font size (use CSS instead).</td></tr>
+            <tr><td>color</td><td>Specified the font color (use CSS instead).</td></tr>
+        </table>
+
+        <h3>11.9 &lt;frame&gt;</h3>
+        <pre><code>&lt;frame src="frame.html"&gt;</code></pre>
+        <div class="output">
+            <i>[Frame: Deprecated]</i>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>src</td><td>Specified the frame’s content URL (use &lt;iframe&gt; instead).</td></tr>
+            <tr><td>name</td><td>Named the frame for targeting.</td></tr>
+        </table>
+
+        <h3>11.10 &lt;frameset&gt;</h3>
+        <pre><code>&lt;frameset cols="50%,50%"&gt;&lt;/frameset&gt;</code></pre>
+        <div class="output">
+            <i>[Frameset: Deprecated]</i>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>cols</td><td>Defined column layout for frames (use CSS instead).</td></tr>
+            <tr><td>rows</td><td>Defined row layout for frames (use CSS instead).</td></tr>
+        </table>
+
+        <h3>11.11 &lt;isindex&gt;</h3>
+        <pre><code>&lt;isindex prompt="Search:"&gt;</code></pre>
+        <div class="output">
+            <i>[Isindex: Deprecated]</i>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>prompt</td><td>Displayed a prompt for the input field (use &lt;input&gt; instead).</td></tr>
+        </table>
+
+        <h3>11.12 &lt;keygen&gt;</h3>
+        <pre><code>&lt;keygen name="name"&gt;</code></pre>
+        <div class="output">
+            <i>[Keygen: Deprecated]</i>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>name</td><td>Specified the name for form submission (use modern cryptography APIs).</td></tr>
+            <tr><td>keytype</td><td>Defined the key type (e.g., "rsa").</td></tr>
+        </table>
+
+        <h3>11.13 &lt;listing&gt;</h3>
+        <pre><code>&lt;listing&gt;Code block or listing&lt;/listing&gt;</code></pre>
+        <div class="output">
+            <pre>Code block or listing</pre>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>(No specific attributes)</td><td>Displayed preformatted text (use &lt;pre&gt; instead).</td></tr>
+        </table>
+
+        <h3>11.14 &lt;marquee&gt;</h3>
+        <pre><code>&lt;marquee&gt;Scrolling text&lt;/marquee&gt;</code></pre>
+        <div class="output">
+            <marquee>Scrolling text</marquee>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>behavior</td><td>Defined scrolling type (e.g., "scroll", "slide").</td></tr>
+            <tr><td>direction</td><td>Defined scrolling direction (e.g., "left", "right").</td></tr>
+            <tr><td>loop</td><td>Specified the number of loops.</td></tr>
+            <tr><td>scrollamount</td><td>Defined the scrolling speed.</td></tr>
+        </table>
+
+        <h3>11.15 &lt;menu&gt;</h3>
+        <pre><code>&lt;menu&gt;
+    &lt;menuitem label="Save"&gt;&lt;/menuitem&gt;
+&lt;/menu&gt;</code></pre>
+        <div class="output">
+            <i>[Menu and menuitem: Deprecated]</i>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>type</td><td>Defined the menu type (e.g., "context") (use &lt;ul&gt; instead).</td></tr>
+        </table>
+
+        <h3>11.16 &lt;menuitem&gt;</h3>
+        <pre><code>&lt;menu&gt;
+    &lt;menuitem label="Save"&gt;&lt;/menuitem&gt;
+&lt;/menu&gt;</code></pre>
+        <div class="output">
+            <i>[Menuitem: Deprecated]</i>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>label</td><td>Defined the menu item’s visible name.</td></tr>
+            <tr><td>command</td><td>Specified the command to execute.</td></tr>
+        </table>
+
+        <h3>11.17 &lt;multicol&gt;</h3>
+        <pre><code>&lt;multicol cols="2"&gt;Columned text&lt;/multicol&gt;</code></pre>
+        <div class="output">
+            <i>[Multicol: Deprecated]</i>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>cols</td><td>Defined the number of columns (use CSS columns instead).</td></tr>
+        </table>
+
+        <h3>11.18 &lt;nextid&gt;</h3>
+        <pre><code>&lt;nextid n="1"&gt;</code></pre>
+        <div class="output">
+            <i>[NextID: Deprecated]</i>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>n</td><td>Specified the next ID for editing (obsolete).</td></tr>
+        </table>
+
+        <h3>11.19 &lt;noembed&gt;</h3>
+        <pre><code>&lt;noembed&gt;No embed fallback&lt;/noembed&gt;</code></pre>
+        <div class="output">
+            <i>[Noembed fallback]</i>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>(No specific attributes)</td><td>Provided fallback for &lt;embed&gt; (use modern fallback methods).</td></tr>
+        </table>
+
+        <h3>11.20 &lt;plaintext&gt;</h3>
+        <pre><code>&lt;plaintext&gt;All tags here are plain text.&lt;/plaintext&gt;</code></pre>
+        <div class="output">
+            <pre>All tags here are plain text.</pre>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>(No specific attributes)</td><td>Displayed all content as plain text (use &lt;pre&gt; instead).</td></tr>
+        </table>
+
+        <h3>11.21 &lt;spacer&gt;</h3>
+        <pre><code>&lt;spacer type="horizontal" size="20"&gt;</code></pre>
+        <div class="output">
+            <i>[Spacer: Deprecated]</i>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>type</td><td>Defined the spacer type (e.g., "horizontal") (use CSS instead).</td></tr>
+            <tr><td>size</td><td>Specified the spacer size (use CSS instead).</td></tr>
+        </table>
+
+        <h3>11.22 &lt;strike&gt;</h3>
+        <pre><code>&lt;strike&gt;Struck text&lt;/strike&gt;</code></pre>
+        <div class="output">
+            <s>Struck text</s>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>(No specific attributes)</td><td>Displayed strikethrough text (use &lt;s&gt; or &lt;del&gt; instead).</td></tr>
+        </table>
+
+        <h3>11.23 &lt;tt&gt;</h3>
+        <pre><code>&lt;tt&gt;Teletype text&lt;/tt&gt;</code></pre>
+        <div class="output">
+            <code>Teletype text</code>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>(No specific attributes)</td><td>Displayed monospaced text (use &lt;code&gt; or CSS instead).</td></tr>
+        </table>
+
+        <h3>11.24 &lt;xmp&gt;</h3>
+        <pre><code>&lt;xmp&gt;&lt;b&gt;Bold&lt;/b&gt;&lt;/xmp&gt;</code></pre>
+        <div class="output">
+            <pre>&lt;b&gt;Bold&lt;/b&gt;</pre>
+        </div>
+        <table>
+            <tr><th>Attribute</th><th>Description</th></tr>
+            <tr><td>(No specific attributes)</td><td>Displayed raw HTML as text (use &lt;pre&gt; or &lt;code&gt; instead).</td></tr>
+        </table>
+    </div>
+    <div>
+        <a href="./index.html">For HTML Tags </a>
+    </div>
+    </main>
+    <footer>
+        <p>contact: karanveiyon@gmail.com</p>
+        <!-- <p>contact: karan@techscription.com</p> -->
+        <p>&copy; 2025 Techscription</p>
+    </footer>
+</body>
+</html>
