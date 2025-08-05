@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>CSS Notes - Beginner to Advanced</title>
+    <style>
+                *{ margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6;background: #f9f9f9; }
+                main{ padding: 20px;}
+        nav{width: 100%; display: flex; flex-direction: row; justify-content: space-between;align-items: center; background-color: rgb(31, 31, 31); padding:2px 10px}
+        .name-div { width: 50%; font-size: 24px; font-weight: bold; color: #ffffff; }
+        .menu-div {  width: 50%;align-items: center;}
+        .menu-div ul { list-style: none; display: flex; display: flex; flex-direction: row; justify-content: space-evenly; font-size: 14px; color: #ffffff; }
+        .menu-div a{ text-decoration: none; color: #ffffff; }
+        footer { text-align: center; padding: 10px; background-color: #333; color: #fff; position: relative; bottom: 0; width: 100%; }
+
+
+        
+        .name-div {
+            font-weight: bold;
+        }
+
+        .menu-div ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu-div a {
+            color: white;
+            text-decoration: none;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .example {
+            margin-bottom: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        pre {
+            background: #f0f0f0;
+            padding: 15px;
+            overflow-x: auto;
+            border-left: 4px solid #1e3a8a;
+        }
+
+        code {
+            font-family: Consolas, monospace;
+            color: #222;
+        }
+
+        .output {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: #fafafa;
+            border: 1px solid #ddd;
+        }
+    #transition_div {
+      width: 100px;
+      height: 100px;
+      background: lightblue;
+      position: relative; /* required for left animation */
+      transition: background 0.3s;
+    }
+
+    #transition_div:hover {
+      background: rgb(255, 5, 46);
+      animation: slide 1s forwards; /* apply animation on hover */
+    }
+
+    @keyframes slide {
+      from { left: 0; }
+      to { left: 100px; }
+    }
+/*         .output {
+        position: relative; 
+        transition: background 0.3s;
+        animation: slide 1s forwards; 
+        }
+
+        .output:hover {
+        background: pink;
+        } */
+
+/*         @keyframes slide {
+        from { left: 0; }
+        to { left: 100px; }
+        } */
+        ul.downloads {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 40px;
+        }
+
+        ul.downloads li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <nav>
+        <div class="name-div">Web Dev Lessons</div>
+        <div class="menu-div">
+            <ul>
+                <li><a href="./code_ground.html">Code Area</a></li>
+                <li><a href="./index.html">HTML</a></li>
+                <li><a href="./html_tag_attributes.html">HTML 1</a></li>
+                <!-- <li><a href="./css.html">CSS</a></li> -->
+                <li><a href="./css_notes.html">CSS</a></li>
+                <!-- <li><a href="./js.html">Javascript</a></li> -->
+                <li><a href="#">Javascript</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+    <main>
+        <h1>CSS Notes - Beginner to Advanced</h1>
+
+        <div class="example">
+            <h2>1. Introduction to CSS</h2>
+            <h3>CSS Syntax</h3>
+            <pre><code>selector {
+          property: value;
+        }
+        p{
+            color:purple;
+        }    
+    </code></pre>
+            <div class="output">
+                <p style="color: purple;">This is a blue paragraph using CSS syntax.</p>
+            </div>
+        
+            <h3>Types of CSS</h3>
+            <pre><code>// Inline
+        &lt;p style="color:red"&gt;Text&lt;/p&gt;
+        
+        // Internal
+        &lt;style&gt;p { color: red; }&lt;/style&gt;
+        
+        // External
+        &lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+            <div class="output">
+                <p style="color:red">This is red text using inline CSS.</p>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>2. Selectors and Properties</h2>
+            <pre><code>
+        /* Element Selector */
+        p {
+          color: green;
+        }
+        
+        /* Class Selector */
+        .red {
+          color: red;
+        }
+        
+        /* ID Selector */
+        #blue {
+          color: blue;
+        }
+
+        &lt;p&gt;This is a green paragraph.&lt;/p&gt;
+        &lt;p class=&quot;red&quot;&gt;This is a red paragraph.&lt;/p&gt;
+        &lt;p id=&quot;blue&quot;&gt;This is a blue paragraph.&lt;/p&gt;
+    </code></pre>
+            <div class="output">
+                <p style="color: green;">This is a green paragraph.</p>
+                <p class="red" style="color: red;">This is a red paragraph.</p>
+                <p id="blue" style="color: blue;">This is a blue paragraph.</p>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>3. Colors and Backgrounds</h2>
+            <pre><code>body {
+          background-color: #f0f8ff;
+        }
+        
+        p {
+          color: rgba(255,0,0,0.7);
+        }</code></pre>
+            <div class="output" style="background-color: #f0f8ff;">
+                <p style="color: rgba(255,0,0,0.7);">This paragraph has semi-transparent red text.</p>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>4. Text and Fonts</h2>
+            <pre><code>p {
+          font-family: 'Arial';
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          text-decoration: underline;
+        }</code></pre>
+            <div class="output">
+                <p
+                    style="font-family: Arial; font-size: 18px; font-weight: bold; text-align: center; text-decoration: underline;">
+                    This is styled text.
+                </p>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>5. Box Model</h2>
+            <pre><code>div {
+          width: 200px;
+          height: 100px;
+          padding: 10px;
+          margin: 20px;
+          border: 2px solid black;
+          box-sizing: border-box;
+        }</code></pre>
+            <div class="output">
+                <div
+                    style="width:200px; height:100px; padding:10px; margin:20px; border:2px solid black; box-sizing: border-box; background:#e0e0e0;">
+                    Box Model Example
+                </div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>6. Units & Measurements</h2>
+            <pre><code>p {
+          font-size: 2em;
+          width: 80%;
+        }</code></pre>
+            <div class="output">
+                <p style="font-size:2em; width:80%;">This text uses em units and relative width.</p>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h2>7. Basic Layout</h2>
+            <pre><code>span {
+          display: inline;
+        }
+        div {
+          display: block;
+        }</code></pre>
+            <div class="output">
+                <span style="display:inline; background:yellow;">Inline span</span>
+                <div style="display:block; background:lightblue;">Block div</div>
+            </div>
+        </div>
+        <!-- Example 1 -->
+        <div class="example">
+            <h2>8. Changing Text Color</h2>
+            <pre><code>&lt;style&gt;
+  h1 {
+    color: red;
+  }
+&lt;/style&gt;
+
+&lt;h1&gt;Hello CSS&lt;/h1&gt;</code></pre>
+            <div class="output">
+                <style>
+                    .example:nth-of-type(1) h1 {
+                        color: red;
+                    }
+                </style>
+                <h1 style="color: red;">Hello CSS</h1>
+            </div>
+        </div>
+
+        <!-- Example 2 -->
+        <div class="example">
+            <h2>9. Background Color</h2>
+            <pre><code>&lt;style&gt;
+  body {
+    background-color: lightyellow;
+  }
+&lt;/style&gt;
+
+&lt;p&gt;Background is light yellow&lt;/p&gt;</code></pre>
+            <div class="output" style="background-color: lightyellow;">
+                <p>Background is light yellow</p>
+            </div>
+        </div>
+
+        <!-- Example 3 -->
+        <div class="example">
+            <h2>10. Font Size & Family</h2>
+            <pre><code>&lt;style&gt;
+  p {
+    font-size: 20px;
+    font-family: Arial;
+  }
+&lt;/style&gt;
+
+&lt;p&gt;This is styled text.&lt;/p&gt;</code></pre>
+            <div class="output">
+                <p style="font-size: 20px; font-family: Arial;">This is styled text.</p>
+            </div>
+        </div>
+
+        <!-- Example 4 -->
+        <div class="example">
+            <h2>11. Border and Padding</h2>
+            <pre><code>&lt;style&gt;
+  div {
+    border: 2px solid black;
+    padding: 10px;
+  }
+&lt;/style&gt;
+
+&lt;div&gt;This is a bordered box&lt;/div&gt;</code></pre>
+            <div class="output">
+                <div style="border: 2px solid black; padding: 10px;">This is a bordered box</div>
+            </div>
+        </div>
+
+        <!-- Example 5 -->
+        <div class="example">
+            <h2>12. Text Alignment</h2>
+            <pre><code>&lt;style&gt;
+  h2 {
+    text-align: center;
+  }
+&lt;/style&gt;
+
+&lt;h2&gt;Centered Heading&lt;/h2&gt;</code></pre>
+            <div class="output">
+                <h2 style="text-align: center;">Centered Heading</h2>
+            </div>
+        </div>
+
+    <div class="example">
+        <h2>13. Advanced Selectors - Pseudo-classes</h2>
+        <pre><code>a:hover {
+      color: red;
+    }
+    input:focus {
+      border: 2px solid blue;
+    }
+    li:nth-child(odd) {
+      background: #eee;
+    }</code></pre>
+        <div class="output">
+            <ul>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ul>
+            <input type="text" placeholder="Focus me">
+            <a href="#">Hover me</a>
+        </div>
+    </div>
+    
+    <div class="example">
+        <h2>14. Advanced Selectors - Pseudo-elements</h2>
+        <pre><code>p::before {
+      content: "Note: ";
+      color: red;
+    }
+    p::after {
+      content: " ✔";
+      color: green;
+    }</code></pre>
+        <div class="output">
+            <p>This is styled with pseudo-elements.</p>
+        </div>
+    </div>
+    
+    <div class="example">
+        <h2>15. Positioning & Z-Index</h2>
+        <pre><code>.box {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 10;
+    }</code></pre>
+        <div class="output">
+            <div style="position: relative; height: 100px;">
+                <div
+                    style="position: absolute; top: 10px; left: 10px; background: red; width: 50px; height: 50px; z-index: 2;">
+                </div>
+                <div
+                    style="position: absolute; top: 20px; left: 20px; background: blue; width: 50px; height: 50px; z-index: 1;">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="example">
+        <h2>16. Flexbox</h2>
+        <pre><code>.container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 10px;
+    }</code></pre>
+        <div class="output">
+            <div style="display: flex; justify-content: space-around; align-items: center; gap: 10px;">
+                <div style="background: orange; padding: 10px;">1</div>
+                <div style="background: green; padding: 10px;">2</div>
+                <div style="background: purple; padding: 10px;">3</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="example">
+        <h2>17. CSS Grid</h2>
+        <pre><code>.grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }</code></pre>
+        <div class="output">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                <div style="background: #ccc; padding: 10px;">A</div>
+                <div style="background: #ccc; padding: 10px;">B</div>
+                <div style="background: #ccc; padding: 10px;">C</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="example">
+        <h2>18. Transitions and Animations</h2>
+        <pre><code>div {
+    width: 100px;
+    height: 100px;
+    background: lightblue;
+    position: relative; /* required for left animation */
+    transition: background 0.3s;
+}
+div:hover {
+    background: rgb(255, 5, 46);
+    animation: slide 1s forwards; /* apply animation on hover */
+}
+
+@keyframes slide {
+    from { left: 0; }
+    to { left: 100px; }
+}</code></pre>
+        <div class="output">
+            <div id="transition_div">Hover me</div>
+        </div>
+    </div>
+    
+    <div class="example">
+        <h2>19. Media Queries</h2>
+        <pre><code>@media (max-width: 600px) {
+      body {
+        background: lightgreen;
+      }
+    }</code></pre>
+        <div class="output">
+            <p>Resize the window to see the effect.</p>
+        </div>
+    </div>
+    
+    <div class="example">
+        <h2>20. Forms Styling</h2>
+        <pre><code>input[type="text"] {
+      padding: 10px;
+      border: 2px solid gray;
+    }
+    input:focus {
+      border-color: blue;
+    }</code></pre>
+        <div class="output">
+            <input type="text" placeholder="Focus here">
+        </div>
+    </div>
+    
+    <div class="example">
+        <h2>21. Shadows and Filters</h2>
+        <pre><code>h3 {
+      text-shadow: 2px 2px #aaa;
+    }
+    div {
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+      filter: grayscale(50%);
+    }</code></pre>
+        <div class="output">
+            <h3>Shadowed Text</h3>
+            <div
+                style="width: 100px; height: 100px; background: #999; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); filter: grayscale(50%);">
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
